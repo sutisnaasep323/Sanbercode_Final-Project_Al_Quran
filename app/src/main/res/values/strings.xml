@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Ruh Kehidupan</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Asep Sutisna</string>
+    <string name="nav_header_subtitle">Sanbercode Bootcamp</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_quran">Al-Qur\'an</string>
+    <string name="menu_dzikir">Dzikir</string>
+    <string name="menu_doa">Doa</string>
+    <string name="number">1</string>
+    <string name="desc_ayat">Desc Ayat</string>
+    <string name="desc_surah_content">%1$s, %2$s Ayat</string>
+    <string name="arabic">ARABIC</string>
+    <string name="name_surah">Name Surah</string>
+    <string name="judul">Judul</string>
+    <string name="dibaca">Dibaca 1x</string>
+    <string name="indo">Indonesia</string>
+    <string name="ayat">%s ayat</string>
+    <string name="resource_dalil">Sumber Dalil</string>
+    <string name="dalil_desc">Ini dalilnya atau keutamaannya</string>
+    <string name="tab_text_1">Dzikir Pagi</string>
+    <string name="tab_text_2">Dzikir Petang</string>
+
+    <string name="content_tab_text">This is Tab %1$d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dark_mode">Mode Malam</string>
+    <string name="ic_back">Tombol Kembali</string>
+    <string name="tafsir">Tafsir</string>
+</resources>

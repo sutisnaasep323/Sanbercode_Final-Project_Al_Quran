@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#2b7fa4</color>
+    <color name="on_primary">#FFFFFFFF</color>
+    <color name="primary_variant">#0f6284</color>
+    <color name="text_color">#2b7fa4</color>
+    <color name="text_primary">#2b7fa4</color>
+    <color name="text_title">#FF000000</color>
+    <color name="sub_text">#888888</color>
+    <color name="background">#FFFFFFFF</color>
+    <color name="card_background">#FFFFFFFF</color>
+    <color name="text_select">#2b7fa4</color>
+    <color name="start_nav">#29A3DA</color>
+    <color name="center_nav">#02719F</color>
+    <color name="end_nav">#094B66</color>
+</resources>

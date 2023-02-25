@@ -1,0 +1,46 @@
+package com.asep.ruhkehidupan.viewmodel
+
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.asep.ruhkehidupan.api.ApiConfig
+import com.asep.ruhkehidupan.model.Data
+import com.asep.ruhkehidupan.model.QuranResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class QuranViewModel : ViewModel() {
+
+    private val _listSurah = MutableLiveData<List<Data>>()
+    val listSurah: LiveData<List<Data>> = _listSurah
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    init {
+        setListSurah()
+    }
+
+    private fun setListSurah() {
+        _isLoading.value = true
+        ApiConfig.getApiService().getListSurah().enqueue(object : Callback<QuranResponse> {
+            override fun onResponse(call: Call<QuranResponse>, response: Response<QuranResponse>) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    _listSurah.value = response.body()?.data
+                } else {
+                    Log.e("failure", "onFailure: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<QuranResponse>, t: Throwable) {
+                _isLoading.value = false
+                Log.e("failure", t.toString())
+            }
+
+        })
+    }
+
+}
