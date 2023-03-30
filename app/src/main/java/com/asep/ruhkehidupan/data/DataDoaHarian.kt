@@ -15,6 +15,7 @@ object DataDoaHarian {
         "8",
         "9",
         "10",
+        "11"
     )
 
     private val judul = arrayOf(
@@ -27,7 +28,8 @@ object DataDoaHarian {
         "Doa Memohon Kemudahan",
         "Doa Ketika Dalam Kesulitan",
         "Doa Memohon Hidayah, Ketakwaan, Iffah, dan Kekayaan Jiwa",
-        "Doa Memohon Kebaikan Dunia dan Akhirat"
+        "Doa Memohon Kebaikan Dunia dan Akhirat",
+        "Doa Penutup Sebelum Tidur"
     )
 
     private val arabic = arrayOf(
@@ -49,7 +51,9 @@ object DataDoaHarian {
 
         "اَللّٰهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى، وَالتُّقَى، وَالْعَفَافَ، وَالْغِنَى",
 
-        "رَبَّنَا آتِنَا فِى الدُّنْيَا حَسَنَةً وَفِي اْلآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ"
+        "رَبَّنَا آتِنَا فِى الدُّنْيَا حَسَنَةً وَفِي اْلآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+
+        "اَللَّهُمَّ أَسْلَمْتُ نَفْسِيْ إِلَيْكَ، وَفَوَّضْتُ أَمْرِيْ إِلَيْكَ، وَوَجَّهْتُ وَجْهِيَ إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِيْ إِلَيْكَ، رَغْبَةً وَرَهْبَةً إِلَيْكَ، لاَ مَلْجَأَ وَلاَ مَنْجَا مِنْكَ إِلاَّ إِلَيْكَ، آمَنْتُ بِكِتَابِكَ الَّذِيْ أَنْزَلْتَ وَبِنَبِيِّكَ الَّذِيْ أَرْسَلْتَ"
 
     )
 
@@ -72,7 +76,9 @@ object DataDoaHarian {
 
         "“Ya Allah, sesungguhnya aku memohon kepada-MU hidayah (petunjuk), ketaqwaan, iffah (kehormatan diri / terhindar dari yang haram), serta memohon kepada-MU kekayaan jiwa.“",
 
-        "“Ya Allah, berikanlah kepada kami kebaikan di dunia dan berikan pula kebaikan di akhirat, dan lindungilah kami dari siksa api neraka.“"
+        "“Ya Allah, berikanlah kepada kami kebaikan di dunia dan berikan pula kebaikan di akhirat, dan lindungilah kami dari siksa api neraka.“",
+
+        "“Ya Allah, aku menyerahkan diriku kepadaMu, aku menyerahkan urusanku kepadaMu, aku menghadapkan wajahku kepadaMu, aku menyandarkan punggungku kepadaMu, karena senang (mendapatkan rahmatMu) dan takut pada (siksaanMu, bila melakukan kesalahan). Tidak ada tempat perlindungan dan penyelamatan dari (ancaman)Mu, kecuali kepadaMu. Aku beriman pada kitab yang telah Engkau turunkan, dan (kebenaran) NabiMu yang telah Engkau utus.“"
 
     )
 
@@ -86,7 +92,8 @@ object DataDoaHarian {
         "(HR. Ibnu as-Sunni dalam 'Amal Al-Yaum wa Al-Lailah no. 351)",
         "(HR. Bukhari, no. 6346)",
         "(HR. Muslim, no. 2721)",
-        "(QS. Al-Baqarah: 201)"
+        "(QS. Al-Baqarah: 201)",
+        "(HR. Bukhari, no. 6313; Muslim, no. 2710)"
     )
 
     val listDataDoaHarian: ArrayList<Dzikir>

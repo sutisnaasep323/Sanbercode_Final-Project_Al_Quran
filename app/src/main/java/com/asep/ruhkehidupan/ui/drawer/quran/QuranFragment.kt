@@ -1,12 +1,8 @@
 package com.asep.ruhkehidupan.ui.drawer.quran
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +10,6 @@ import com.asep.ruhkehidupan.R
 import com.asep.ruhkehidupan.adapter.SurahAdapter
 import com.asep.ruhkehidupan.databinding.FragmentQuranBinding
 import com.asep.ruhkehidupan.model.Data
-import com.asep.ruhkehidupan.viewmodel.QuranDetailViewModel
 import com.asep.ruhkehidupan.viewmodel.QuranViewModel
 
 class QuranFragment : Fragment() {
@@ -76,7 +71,6 @@ class QuranFragment : Fragment() {
 
         mBundle.putString(DetailQuranFragment.EXTRA_NAME_SURAH, surah)
         mBundle.putInt(DetailQuranFragment.EXTRA_ID_SURAH, number)
-//        Log.i("Bundle", mBundle.toString())
 
         mDetailQuranFragment.arguments = mBundle
         mFragmentManager.beginTransaction().apply {

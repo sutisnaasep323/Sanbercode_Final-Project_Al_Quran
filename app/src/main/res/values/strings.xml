@@ -21,8 +21,9 @@
     <string name="ayat">%s ayat</string>
     <string name="resource_dalil">Sumber Dalil</string>
     <string name="dalil_desc">Ini dalilnya atau keutamaannya</string>
-    <string name="tab_text_1">Dzikir Pagi</string>
-    <string name="tab_text_2">Dzikir Petang</string>
+    <string name="tab_text_1">Pagi</string>
+    <string name="tab_text_2">Petang</string>
+    <string name="tab_text_3">Ba\'da Shalat</string>
 
     <string name="content_tab_text">This is Tab %1$d</string>
     <!-- TODO: Remove or change this placeholder text -->

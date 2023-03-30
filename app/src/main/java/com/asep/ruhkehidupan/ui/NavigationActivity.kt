@@ -1,13 +1,10 @@
 package com.asep.ruhkehidupan.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.CompoundButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,18 +13,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
+import androidx.core.content.res.ResourcesCompat
 import com.asep.ruhkehidupan.R
 import com.asep.ruhkehidupan.databinding.ActivityNavigationBinding
-import com.asep.ruhkehidupan.preferences.SettingPreferences
-import com.asep.ruhkehidupan.viewmodel.SettingViewModel
-import com.asep.ruhkehidupan.viewmodel.ViewModelFactory
-import com.google.android.material.switchmaterial.SwitchMaterial
 
 class NavigationActivity : AppCompatActivity() {
 
@@ -51,7 +39,7 @@ class NavigationActivity : AppCompatActivity() {
                 R.id.nav_quran, R.id.nav_dzikir, R.id.nav_doa
             ), drawerLayout
         )
-        binding.appBarNavigation.toolbar.setTitleTextColor( resources.getColor(R.color.text_primary))
+        binding.appBarNavigation.toolbar.setTitleTextColor( ResourcesCompat.getColor(resources,R.color.text_primary, null))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
