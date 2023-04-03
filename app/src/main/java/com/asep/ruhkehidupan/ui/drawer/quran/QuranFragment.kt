@@ -10,6 +10,7 @@ import com.asep.ruhkehidupan.R
 import com.asep.ruhkehidupan.adapter.SurahAdapter
 import com.asep.ruhkehidupan.databinding.FragmentQuranBinding
 import com.asep.ruhkehidupan.model.Data
+import com.asep.ruhkehidupan.network.NetworkUtils
 import com.asep.ruhkehidupan.viewmodel.QuranViewModel
 
 class QuranFragment : Fragment() {
@@ -31,17 +32,40 @@ class QuranFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mQuranViewModel =
-            ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
-                QuranViewModel::class.java
-            )
-        binding.rvSurah.layoutManager = LinearLayoutManager(requireContext())
-        mQuranViewModel.listSurah.observe(requireActivity()) { data ->
-            setListSurah(data)
-        }
+        if (NetworkUtils.isInternetAvailable(requireContext())) {
+            mQuranViewModel =
+                ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
+                    QuranViewModel::class.java
+                )
+            binding.rvSurah.layoutManager = LinearLayoutManager(requireContext())
+            mQuranViewModel.listSurah.observe(requireActivity()) { data ->
+                setListSurah(data)
+            }
 
-        mQuranViewModel.isLoading.observe(requireActivity()) {
-            showLoading(it)
+            mQuranViewModel.isLoading.observe(requireActivity()) {
+                showLoading(it)
+            }
+        } else {
+            binding.rvSurah.visibility = View.GONE
+            binding.errorLayout.visibility = View.VISIBLE
+            binding.btnRefresh.setOnClickListener {
+                quranRefresh()
+            }
+            showLoading(false)
+        }
+    }
+
+    private fun quranRefresh() {
+        val mCategoryFragment = QuranFragment()
+        val mFragmentManager = parentFragmentManager
+        mFragmentManager.beginTransaction().apply {
+            replace(
+                R.id.frame_container,
+                mCategoryFragment,
+                QuranFragment::class.java.simpleName
+            )
+            addToBackStack(null)
+            commit()
         }
     }
 

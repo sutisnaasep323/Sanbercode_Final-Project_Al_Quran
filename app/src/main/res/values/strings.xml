@@ -31,4 +31,7 @@
     <string name="dark_mode">Mode Malam</string>
     <string name="ic_back">Tombol Kembali</string>
     <string name="tafsir">Tafsir</string>
+    <string name="oops">Oops! Afwan akses ditutup</string>
+    <string name="cek_connection">Silahkan hidupkan koneksi internet dan coba kembali</string>
+    <string name="refresh">Refresh</string>
 </resources>

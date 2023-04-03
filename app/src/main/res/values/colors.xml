@@ -6,6 +6,7 @@
     <color name="text_color">#2b7fa4</color>
     <color name="text_primary">#2b7fa4</color>
     <color name="text_title">#FF000000</color>
+    <color name="btn_true">#099ADA</color>
     <color name="sub_text">#888888</color>
     <color name="background">#FFFFFFFF</color>
     <color name="card_background">#FFFFFFFF</color>
