@@ -1,7 +1,9 @@
 package com.asep.ruhkehidupan.model
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class QuranDetailResponse(
 
 	@field:SerializedName("data")
@@ -14,6 +16,7 @@ data class QuranDetailResponse(
 	val status: Int
 )
 
+@Keep
 data class AsmaDetail(
 
 	@field:SerializedName("ar")
@@ -29,6 +32,7 @@ data class AsmaDetail(
 	val id: IdDetail
 )
 
+@Keep
 data class ArDetail(
 
 	@field:SerializedName("short")
@@ -38,6 +42,7 @@ data class ArDetail(
 	val jsonMemberLong: String
 )
 
+@Keep
 data class DataDetail(
 
 	@field:SerializedName("number")
@@ -68,6 +73,7 @@ data class DataDetail(
 	val recitation: RecitationDetail
 )
 
+@Keep
 data class IdDetail(
 
 	@field:SerializedName("short")
@@ -77,6 +83,7 @@ data class IdDetail(
 	val jsonMemberLong: String
 )
 
+@Keep
 data class AyahsItem(
 
 	@field:SerializedName("number")
@@ -113,6 +120,7 @@ data class AyahsItem(
 	val juz: Int
 )
 
+@Keep
 data class TafsirDetail(
 
 	@field:SerializedName("en")
@@ -124,6 +132,7 @@ data class TafsirDetail(
 	var isExpandable: Boolean = false
 )
 
+@Keep
 data class Sajda(
 
 	@field:SerializedName("obligatory")
@@ -133,6 +142,7 @@ data class Sajda(
 	val recommended: Boolean
 )
 
+@Keep
 data class TranslationDetail(
 
 	@field:SerializedName("en")
@@ -142,6 +152,7 @@ data class TranslationDetail(
 	val id: String
 )
 
+@Keep
 data class TypeDetail(
 
 	@field:SerializedName("ar")
@@ -154,18 +165,21 @@ data class TypeDetail(
 	val id: String
 )
 
+@Keep
 data class RecitationDetail(
 
 	@field:SerializedName("full")
 	val full: String
 )
 
+@Keep
 data class Audio(
 
 	@field:SerializedName("url")
 	val url: String
 )
 
+@Keep
 data class EnDetail(
 
 	@field:SerializedName("short")
@@ -175,6 +189,7 @@ data class EnDetail(
 	val jsonMemberLong: String
 )
 
+@Keep
 data class TextDetail(
 
 	@field:SerializedName("ar")
@@ -184,6 +199,7 @@ data class TextDetail(
 	val read: String
 )
 
+@Keep
 data class Number(
 
 	@field:SerializedName("inquran")

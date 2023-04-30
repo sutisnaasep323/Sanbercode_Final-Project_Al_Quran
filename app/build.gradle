@@ -12,8 +12,8 @@ android {
         applicationId "com.asep.ruhkehidupan"
         minSdk 23
         targetSdk 33
-        versionCode 3
-        versionName "3.0"
+        versionCode 6
+        versionName "3.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "API_URL", "\"https://quran-endpoint.vercel.app/\""

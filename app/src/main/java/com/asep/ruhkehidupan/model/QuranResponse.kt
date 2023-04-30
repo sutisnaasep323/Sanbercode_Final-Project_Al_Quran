@@ -1,7 +1,9 @@
 package com.asep.ruhkehidupan.model
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
  data class QuranResponse(
 
 	@field:SerializedName("data")
@@ -14,6 +16,7 @@ import com.google.gson.annotations.SerializedName
 	val status: Int
 )
 
+@Keep
  data class Type(
 
 	@field:SerializedName("ar")
@@ -26,6 +29,7 @@ import com.google.gson.annotations.SerializedName
 	val id: String
 )
 
+@Keep
  data class Data(
 
 	@field:SerializedName("number")
@@ -53,6 +57,7 @@ import com.google.gson.annotations.SerializedName
 	val recitation: Recitation
 )
 
+@Keep
  data class Ar(
 
 	@field:SerializedName("short")
@@ -62,6 +67,7 @@ import com.google.gson.annotations.SerializedName
 	val jsonMemberLong: String
 )
 
+@Keep
  data class Translation(
 
 	@field:SerializedName("en")
@@ -71,12 +77,14 @@ import com.google.gson.annotations.SerializedName
 	val id: String
 )
 
+@Keep
  data class Recitation(
 
 	@field:SerializedName("full")
 	val full: String
 )
 
+@Keep
  data class En(
 
 	@field:SerializedName("short")
@@ -86,6 +94,7 @@ import com.google.gson.annotations.SerializedName
 	val jsonMemberLong: String
 )
 
+@Keep
  data class Tafsir(
 
 	@field:SerializedName("en")
@@ -95,6 +104,7 @@ import com.google.gson.annotations.SerializedName
 	val id: String
 )
 
+@Keep
  data class Text(
 
 	@field:SerializedName("ar")
@@ -104,6 +114,7 @@ import com.google.gson.annotations.SerializedName
 	val read: String
 )
 
+@Keep
  data class PreBismillah(
 
 	@field:SerializedName("translation")
@@ -113,6 +124,7 @@ import com.google.gson.annotations.SerializedName
 	val text: Text
 )
 
+@Keep
  data class Id(
 
 	@field:SerializedName("short")
@@ -122,6 +134,7 @@ import com.google.gson.annotations.SerializedName
 	val jsonMemberLong: String
 )
 
+@Keep
  data class Asma(
 
 	@field:SerializedName("ar")
