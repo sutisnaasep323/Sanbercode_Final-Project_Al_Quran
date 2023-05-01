@@ -14,10 +14,10 @@ https://play.google.com/store/apps/details?id=com.asep.ruhkehidupan
 ---
 ## App View
 
-![Image_Quran](https://drive.google.com/file/d/18J498zEmwRGxHRP9OBqIc8EBynh_IBa-/view?usp=sharing)
+![Image_Quran](https://drive.google.com/file/d/18J498zEmwRGxHRP9OBqIc8EBynh_IBa-/view?raw=true)
 
-![Image_Dzikir](https://drive.google.com/file/d/1GD35YLMPfo8WHS_rXtViuFeXd1RQ2XLy/view?usp=sharing)
+![Image_Dzikir](https://drive.google.com/file/d/1F0K3guht-rJFsMEICw2Sk0OFScZq2lyg/view?raw=true)
 
-![Image_DarkMode](https://drive.google.com/file/d/1F0K3guht-rJFsMEICw2Sk0OFScZq2lyg/view?usp=sharing)
+![Image_DarkMode](https://drive.google.com/file/d/1F0K3guht-rJFsMEICw2Sk0OFScZq2lyg/view?raw=true)
 
-![Image_Doa](https://drive.google.com/file/d/1Fgvw4CBHunqkwqTx9HcTqBUlUSxDCSni/view?usp=sharing)
+![Image_Doa](https://drive.google.com/file/d/1Fgvw4CBHunqkwqTx9HcTqBUlUSxDCSni/view?raw=true)
