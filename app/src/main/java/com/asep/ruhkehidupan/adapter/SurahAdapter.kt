@@ -1,54 +1,49 @@
 package com.asep.ruhkehidupan.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.asep.ruhkehidupan.R
+import com.asep.ruhkehidupan.databinding.ItemSurahBinding
 import com.asep.ruhkehidupan.model.Data
-import com.asep.ruhkehidupan.ui.drawer.quran.DetailQuranFragment
-import com.asep.ruhkehidupan.ui.drawer.quran.QuranFragment
 
 class SurahAdapter(private val dataSurah: List<Data>) :
     RecyclerView.Adapter<SurahAdapter.SurahViewHolder>() {
+
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    class SurahViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvNameSurahID: TextView = view.findViewById(R.id.tv_name_surah_id)
-        val tvNameSurahArabic: TextView = view.findViewById(R.id.tv_name_surah_arabic)
-        val tvNumber: TextView = view.findViewById(R.id.tv_number)
-        val tvDesc: TextView = view.findViewById(R.id.tv_desc_surah)
+    inner class SurahViewHolder(private val binding: ItemSurahBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(data: Data) {
+            binding.tvNameSurahId.text = data.asma.id.jsonMemberShort
+            binding.tvNameSurahArabic.text = data.asma.ar.jsonMemberShort
+            binding.tvDescSurah.text = String.format("%s - %s ayat", data.type.id, data.ayahCount)
+            binding.tvNumber.text = data.number.toString()
+
+            binding.root.setOnClickListener {
+                onItemClickCallback.onItemClicked(dataSurah[adapterPosition])
+            }
+        }
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): SurahViewHolder {
-        val view =
-            LayoutInflater.from(viewGroup.context).inflate(R.layout.item_surah, viewGroup, false)
-        return SurahViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurahViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemSurahBinding.inflate(inflater, parent, false)
+        return SurahViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SurahViewHolder, position: Int) {
         val data = dataSurah[position]
-        holder.tvNameSurahID.text = data.asma.id.jsonMemberShort
-        holder.tvNameSurahArabic.text = data.asma.ar.jsonMemberShort
-        holder.tvDesc.text = String.format("%s - %s ayat", data.type.id, data.ayahCount)
-        holder.tvNumber.text = data.number.toString()
-        holder.itemView.setOnClickListener {
-            onItemClickCallback.onItemClicked(dataSurah[holder.adapterPosition])
-        }
+        holder.bind(data)
     }
 
-    override fun getItemCount() = dataSurah.size
+    override fun getItemCount(): Int = dataSurah.size
 
     interface OnItemClickCallback {
         fun onItemClicked(data: Data)
     }
-
 }

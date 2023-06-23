@@ -1,6 +1,5 @@
 package com.asep.ruhkehidupan.ui.drawer.quran
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -23,39 +22,61 @@ class QuranFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentQuranBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if (NetworkUtils.isInternetAvailable(requireContext())) {
-            mQuranViewModel =
-                ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
-                    QuranViewModel::class.java
-                )
-            binding.rvSurah.layoutManager = LinearLayoutManager(requireContext())
-            mQuranViewModel.listSurah.observe(requireActivity()) { data ->
-                setListSurah(data)
-            }
+            // Inisialisasi ViewModel
+            setupViewModel()
 
-            mQuranViewModel.isLoading.observe(requireActivity()) {
-                showLoading(it)
-            }
+            // Konfigurasi tampilan UI
+            setupUI()
+
+            // Observasi perubahan data
+            setupObservers()
         } else {
-            binding.rvSurah.visibility = View.GONE
-            binding.errorLayout.visibility = View.VISIBLE
-            binding.btnRefresh.setOnClickListener {
-                quranRefresh()
-            }
-            showLoading(false)
+            // Tampilkan UI saat tidak ada koneksi internet
+            showNoInternetUI()
         }
     }
 
+    private fun setupViewModel() {
+        mQuranViewModel =
+            ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
+                QuranViewModel::class.java
+            )
+    }
+
+    private fun setupUI() {
+        binding.rvSurah.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun setupObservers() {
+        mQuranViewModel.listSurah.observe(viewLifecycleOwner) { data ->
+            setListSurah(data)
+        }
+
+        mQuranViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+    }
+
+    private fun showNoInternetUI() {
+        binding.rvSurah.visibility = View.GONE
+        binding.errorLayout.visibility = View.VISIBLE
+        binding.btnRefresh.setOnClickListener {
+            quranRefresh()
+        }
+        showLoading(false)
+    }
+
     private fun quranRefresh() {
+        // Refresh fragment dengan replace ke fragment yang sama
         val mCategoryFragment = QuranFragment()
         val mFragmentManager = parentFragmentManager
         mFragmentManager.beginTransaction().apply {
@@ -64,12 +85,10 @@ class QuranFragment : Fragment() {
                 mCategoryFragment,
                 QuranFragment::class.java.simpleName
             )
-            addToBackStack(null)
             commit()
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun setListSurah(data: List<Data>?) {
         val listSurahAdapter = data?.let { SurahAdapter(it) }
         binding.rvSurah.apply {
@@ -78,27 +97,31 @@ class QuranFragment : Fragment() {
             adapter = listSurahAdapter
         }
 
-        listSurahAdapter?.setOnItemClickCallback(object: SurahAdapter.OnItemClickCallback{
+        listSurahAdapter?.setOnItemClickCallback(object : SurahAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Data) {
                 onDetailClick(data)
             }
-
         })
     }
 
     private fun onDetailClick(data: Data) {
-        val mBundle = Bundle()
-        val mDetailQuranFragment = DetailQuranFragment()
-        val mFragmentManager = parentFragmentManager
-        val number = data.number
-        val surah = data.asma.id.jsonMemberLong
+        val mBundle = Bundle().apply {
+            // Mengisi bundle dengan data yang diperlukan untuk DetailQuranFragment
+            putString(DetailQuranFragment.EXTRA_NAME_SURAH, data.asma.id.jsonMemberLong)
+            putInt(DetailQuranFragment.EXTRA_ID_SURAH, data.number)
+        }
 
-        mBundle.putString(DetailQuranFragment.EXTRA_NAME_SURAH, surah)
-        mBundle.putInt(DetailQuranFragment.EXTRA_ID_SURAH, number)
+        val mDetailQuranFragment = DetailQuranFragment().apply {
+            // Mengatur argument Bundle pada DetailQuranFragment
+            arguments = mBundle
+        }
 
-        mDetailQuranFragment.arguments = mBundle
-        mFragmentManager.beginTransaction().apply {
-            replace(R.id.nav_host_fragment_content_navigation, mDetailQuranFragment, DetailQuranFragment::class.java.simpleName)
+        parentFragmentManager.beginTransaction().apply {
+            replace(
+                R.id.nav_host_fragment_content_navigation,
+                mDetailQuranFragment,
+                DetailQuranFragment::class.java.simpleName
+            )
             addToBackStack(null)
             commit()
         }
@@ -112,5 +135,5 @@ class QuranFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
+

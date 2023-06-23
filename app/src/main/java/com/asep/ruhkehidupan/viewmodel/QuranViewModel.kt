@@ -20,12 +20,13 @@ class QuranViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     init {
-        setListSurah()
+        fetchListSurah()
     }
 
-    private fun setListSurah() {
+    private fun fetchListSurah() {
         _isLoading.value = true
-        ApiConfig.getApiService().getListSurah().enqueue(object : Callback<QuranResponse> {
+        val apiService = ApiConfig.getApiService()
+        val callback = object : Callback<QuranResponse> {
             override fun onResponse(call: Call<QuranResponse>, response: Response<QuranResponse>) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
@@ -39,8 +40,8 @@ class QuranViewModel : ViewModel() {
                 _isLoading.value = false
                 Log.e("failure", t.toString())
             }
-
-        })
+        }
+        apiService.getListSurah().enqueue(callback)
     }
 
 }

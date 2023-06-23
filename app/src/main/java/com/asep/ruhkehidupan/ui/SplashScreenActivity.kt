@@ -16,24 +16,28 @@ import com.asep.ruhkehidupan.viewmodel.SettingViewModel
 import com.asep.ruhkehidupan.viewmodel.ViewModelFactory
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 class SplashScreenActivity : AppCompatActivity() {
+    private val splashTime: Long = 3000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        val splashTime: Long = 3000
-
+        // Menjalankan penundaan untuk memunculkan SplashScreen selama splashTime
         Handler(mainLooper).postDelayed({
             val intent = Intent(this, NavigationActivity::class.java)
             startActivity(intent)
             finish()
         }, splashTime)
 
+        // Mendapatkan instance SettingPreferences dengan menggunakan dataStore
         val pref = SettingPreferences.getInstance(dataStore)
         val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
             SettingViewModel::class.java
         )
 
+        // Mengamati pengaturan tema dan mengubah tema aplikasi sesuai
         settingViewModel.getThemeSettings().observe(
             this
         ) { isDarkModeActive: Boolean ->

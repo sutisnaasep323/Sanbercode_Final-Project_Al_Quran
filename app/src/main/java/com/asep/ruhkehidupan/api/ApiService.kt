@@ -1,6 +1,5 @@
 package com.asep.ruhkehidupan.api
 
-import com.asep.ruhkehidupan.model.AyahsItem
 import com.asep.ruhkehidupan.model.QuranDetailResponse
 import com.asep.ruhkehidupan.model.QuranResponse
 import retrofit2.Call

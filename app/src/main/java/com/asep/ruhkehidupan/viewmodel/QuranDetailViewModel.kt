@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class QuranDetailViewModel: ViewModel() {
+class QuranDetailViewModel : ViewModel() {
 
     private val _listDetailSurah = MutableLiveData<List<AyahsItem>>()
     val listDetailSurah: LiveData<List<AyahsItem>> = _listDetailSurah
@@ -21,14 +21,16 @@ class QuranDetailViewModel: ViewModel() {
 
     fun setListSurah(id: Int) {
         _isLoading.value = true
-        ApiConfig.getApiService().getDetailSurah(id).enqueue(object: Callback<QuranDetailResponse>{
+        val apiService = ApiConfig.getApiService()
+        val callback = object : Callback<QuranDetailResponse> {
             override fun onResponse(
                 call: Call<QuranDetailResponse>,
                 response: Response<QuranDetailResponse>
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
-                    Log.i("detail", response.body()?.data?.ayahs.toString())
+                    val detailSurah = response.body()?.data?.ayahs
+                    Log.i("detail", detailSurah.toString())
                     _listDetailSurah.value = response.body()?.data?.ayahs
                 } else {
                     Log.e("failure", "onFailure: ${response.message()}")
@@ -39,7 +41,8 @@ class QuranDetailViewModel: ViewModel() {
                 _isLoading.value = false
                 Log.e("failure", t.toString())
             }
-        })
+        }
+        apiService.getDetailSurah(id).enqueue(callback)
     }
 
 }

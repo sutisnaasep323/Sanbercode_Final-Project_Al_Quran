@@ -16,7 +16,8 @@ import com.asep.ruhkehidupan.model.Dzikir
 
 class DzikirPetangFragment : Fragment() {
     private var _binding: FragmentDzikirPetangBinding? = null
-    private var listDzikirPetang: ArrayList<Dzikir> = arrayListOf()
+    private var listDzikirPetang: MutableList<Dzikir> = arrayListOf()
+    private lateinit var dzikirAdapter: DzikirAdapter
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -24,16 +25,31 @@ class DzikirPetangFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDzikirPetangBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        addDzikirList()
+        setupDoaAdapter()
+    }
+
+    private fun setupRecyclerView() {
         binding.rvDzikir.setHasFixedSize(true)
         binding.rvDzikir.layoutManager = LinearLayoutManager(requireActivity())
-        listDzikirPetang.addAll(DataDzikirSore.listDataSore)
-        val dzikirAdapter = DzikirAdapter(listDzikirPetang)
+    }
+
+    private fun addDzikirList() {
+        listDzikirPetang.addAll(DataDzikirPagi.listDataPagi)
+    }
+
+    private fun setupDoaAdapter() {
+        dzikirAdapter = DzikirAdapter(listDzikirPetang)
         binding.rvDzikir.adapter = dzikirAdapter
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -34,4 +34,13 @@
     <string name="oops">Oops! Afwan akses ditutup</string>
     <string name="cek_connection">Silahkan hidupkan koneksi internet dan coba kembali</string>
     <string name="refresh">Refresh</string>
+    <string name="title_activity_doa_hafalan">DoaHafalanActivity</string>
+    <string name="title_doa">Doa</string>
+    <string name="title_hafalan">Hafalan</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_coba_bottom">CobaBottomActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="cd_down">Tombol untuk melihat referensi</string>
+    <string name="cd_nomor_surat">Nomor Surat</string>
 </resources>

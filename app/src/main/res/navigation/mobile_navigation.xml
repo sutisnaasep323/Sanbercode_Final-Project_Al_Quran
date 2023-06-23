@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_doa"
-        android:name="com.asep.ruhkehidupan.ui.drawer.doa.DoaFragment"
+        android:name="com.asep.ruhkehidupan.ui.drawer.DoaHafalanFragment"
         android:label="@string/menu_doa"
-        tools:layout="@layout/fragment_doa" />
+        tools:layout="@layout/fragment_doa_hafalan" />
 </navigation>

@@ -20,21 +20,33 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class SettingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingBinding
+    private lateinit var settingViewModel: SettingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupViews()
+        setupViewModel()
+        observeThemeSettings()
+        setupThemeSwitch()
+    }
+
+    private fun setupViews() {
         binding.backButton.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+    }
 
+    private fun setupViewModel() {
         val pref = SettingPreferences.getInstance(dataStore)
-        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+        settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
             SettingViewModel::class.java
         )
+    }
 
+    private fun observeThemeSettings() {
         settingViewModel.getThemeSettings().observe(
             this
         ) { isDarkModeActive: Boolean ->
@@ -46,7 +58,9 @@ class SettingActivity : AppCompatActivity() {
                 binding.switchDarkMode.isChecked = false
             }
         }
+    }
 
+    private fun setupThemeSwitch() {
         binding.switchDarkMode.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             settingViewModel.saveThemeSetting(isChecked)
         }

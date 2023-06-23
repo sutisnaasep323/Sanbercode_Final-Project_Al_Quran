@@ -24,19 +24,16 @@ class DzikirFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDzikirBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity())
-        val viewPager: ViewPager2 = view.findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = view.findViewById(R.id.tabs)
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
+        binding.viewPager.adapter = sectionsPagerAdapter
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+            tab.text = getString(TAB_TITLES[position])
         }.attach()
 
     }

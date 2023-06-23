@@ -17,6 +17,7 @@
             android:id="@+id/imageNumber"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_60sdp"
+            android:contentDescription="@string/cd_nomor_surat"
             android:scaleType="fitXY"
             android:src="@drawable/img_number"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -13,7 +13,8 @@ import com.asep.ruhkehidupan.model.Dzikir
 
 class DzikirPagiFragment : Fragment() {
     private var _binding: FragmentDzikirPagiBinding? = null
-    private var listDzikirPagi: ArrayList<Dzikir> = arrayListOf()
+    private var listDzikirPagi: MutableList<Dzikir> = arrayListOf()
+    private lateinit var dzikirAdapter: DzikirAdapter
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -21,17 +22,32 @@ class DzikirPagiFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDzikirPagiBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        addDzikirList()
+        setupDoaAdapter()
+    }
+
+    private fun setupRecyclerView() {
         binding.rvDzikir.setHasFixedSize(true)
         binding.rvDzikir.layoutManager = LinearLayoutManager(requireActivity())
+    }
+
+    private fun addDzikirList() {
         listDzikirPagi.addAll(DataDzikirPagi.listDataPagi)
-        val dzikirAdapter = DzikirAdapter(listDzikirPagi)
+    }
+
+    private fun setupDoaAdapter() {
+        dzikirAdapter = DzikirAdapter(listDzikirPagi)
         binding.rvDzikir.adapter = dzikirAdapter
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

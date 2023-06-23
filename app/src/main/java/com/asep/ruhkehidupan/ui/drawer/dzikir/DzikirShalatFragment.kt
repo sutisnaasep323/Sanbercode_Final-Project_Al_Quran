@@ -14,7 +14,8 @@ import com.asep.ruhkehidupan.model.Dzikir
 
 class DzikirShalatFragment : Fragment() {
     private var _binding: FragmentDzikirShalatBinding? = null
-    private var listDzikirShalat: ArrayList<Dzikir> = arrayListOf()
+    private var listDzikirShalat: MutableList<Dzikir> = arrayListOf()
+    private lateinit var dzikirAdapter: DzikirAdapter
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,16 +23,31 @@ class DzikirShalatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDzikirShalatBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        addDzikirList()
+        setupDoaAdapter()
+    }
+
+    private fun setupRecyclerView() {
         binding.rvDzikir.setHasFixedSize(true)
         binding.rvDzikir.layoutManager = LinearLayoutManager(requireActivity())
+    }
+
+    private fun addDzikirList() {
         listDzikirShalat.addAll(DataDzikirBadaShalat.listDzikirBadaShalat)
-        val dzikirAdapter = DzikirAdapter(listDzikirShalat)
+    }
+
+    private fun setupDoaAdapter() {
+        dzikirAdapter = DzikirAdapter(listDzikirShalat)
         binding.rvDzikir.adapter = dzikirAdapter
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

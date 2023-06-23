@@ -34,15 +34,21 @@ class NavigationActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_navigation)
 
+        // Menentukan fragment tujuan yang memiliki tampilan AppBar dan navigasi drawer
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_quran, R.id.nav_dzikir, R.id.nav_doa
             ), drawerLayout
         )
-        binding.appBarNavigation.toolbar.setTitleTextColor( ResourcesCompat.getColor(resources,R.color.text_primary, null))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
 
+        // Mengatur warna teks pada toolbar
+        binding.appBarNavigation.toolbar.setTitleTextColor(ResourcesCompat.getColor(resources, R.color.text_primary, null))
+
+        // Menghubungkan ActionBar dengan NavController
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        // Menghubungkan NavigationView dengan NavController
+        navView.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,7 +58,7 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
+        when (item.itemId) {
             R.id.action_settings -> {
                 val intent = Intent(this@NavigationActivity, SettingActivity::class.java)
                 startActivity(intent)
@@ -61,6 +67,7 @@ class NavigationActivity : AppCompatActivity() {
             else -> return false
         }
     }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_navigation)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()

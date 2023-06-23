@@ -1,6 +1,5 @@
 package com.asep.ruhkehidupan.ui.drawer.quran
 
-import android.R.attr
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import com.asep.ruhkehidupan.adapter.DetailSurahAdapter
 import com.asep.ruhkehidupan.databinding.FragmentDetailQuranBinding
 import com.asep.ruhkehidupan.viewmodel.QuranDetailViewModel
 
-
 class DetailQuranFragment : Fragment() {
 
     private lateinit var mQuranDetailViewModel: QuranDetailViewModel
@@ -28,50 +26,58 @@ class DetailQuranFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailQuranBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUI()
+        setupViewModel()
+        setupObservers()
+    }
 
-        if (arguments != null) {
-            nameSurah = arguments?.getString(EXTRA_NAME_SURAH)
-            id = arguments?.getInt(EXTRA_ID_SURAH)
+    private fun setupUI() {
+        arguments?.let {
+            nameSurah = it.getString(EXTRA_NAME_SURAH)
+            id = it.getInt(EXTRA_ID_SURAH)
         }
 
-        Log.i("DetailQuran", id.toString())
         binding.tittleToolbar.text = nameSurah
         binding.backButton.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
-        mQuranDetailViewModel =
-            ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
-                QuranDetailViewModel::class.java
-            )
-        id?.let { mQuranDetailViewModel.setListSurah(it) }
-
         detailSurahAdapter = DetailSurahAdapter()
-        binding.rvDetailSurah.setHasFixedSize(true)
-        binding.rvDetailSurah.layoutManager = LinearLayoutManager(requireActivity())
-        binding.rvDetailSurah.adapter = detailSurahAdapter
+        binding.rvDetailSurah.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = detailSurahAdapter
+        }
+    }
 
+    private fun setupViewModel() {
+        mQuranDetailViewModel = ViewModelProvider(
+            requireActivity(),
+            ViewModelProvider.NewInstanceFactory()
+        ).get(QuranDetailViewModel::class.java)
+        id?.let { mQuranDetailViewModel.setListSurah(it) }
+    }
 
-        mQuranDetailViewModel.listDetailSurah.observe(requireActivity()) { data ->
-            if(data.size != 0){
+    private fun setupObservers() {
+        mQuranDetailViewModel.listDetailSurah.observe(viewLifecycleOwner) { data ->
+            if (data.isNotEmpty()) {
                 detailSurahAdapter.setData(data)
             } else {
-                Toast.makeText(requireActivity(), "Data Tidak Ditemukan!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Data Tidak Ditemukan!", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
-        mQuranDetailViewModel.isLoading.observe(requireActivity()) {
-            showLoading(it)
+        mQuranDetailViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            showLoading(isLoading)
         }
-
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -88,9 +94,13 @@ class DetailQuranFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     companion object {
         const val EXTRA_NAME_SURAH = "extra_name_surah"
         const val EXTRA_ID_SURAH = "extra_id_surah"
     }
-
 }
