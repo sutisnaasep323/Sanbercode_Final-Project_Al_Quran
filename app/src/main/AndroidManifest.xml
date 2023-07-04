@@ -37,8 +37,7 @@
         </activity>
         <activity
             android:name=".ui.SettingActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.NavigationActivity" />
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

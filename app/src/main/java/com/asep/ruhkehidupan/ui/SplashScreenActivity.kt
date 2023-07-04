@@ -24,7 +24,6 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        // Menjalankan penundaan untuk memunculkan SplashScreen selama splashTime
         Handler(mainLooper).postDelayed({
             val intent = Intent(this, NavigationActivity::class.java)
             startActivity(intent)

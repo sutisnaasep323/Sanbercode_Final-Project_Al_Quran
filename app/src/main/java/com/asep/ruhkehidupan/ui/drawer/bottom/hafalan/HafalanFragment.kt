@@ -33,11 +33,12 @@ class HafalanFragment : Fragment() {
             Hafalan("2","Berbeda antara orang yang mengetahui dan tidak mengetahui", "قُلْ هَلْ يَسْتَوِي الَّذِينَ يَعْلَمُونَ وَالَّذِينَ لَا يَعْلَمُونَ", "Katakanlah: Apakah sama orang-orang yang mengetahui dengan orang-orang yang tidak mengetahui?", "QS. Az-Zumar[39]: 9"),
             Hafalan("3", "Jangan Berputus Asa", "قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنْفُسِهِمْ لَا تَقْنَطُوا مِنْ رَحْمَةِ اللَّهِ ۚ إِنَّ اللَّهَ يَغْفِرُ الذُّنُوبَ جَمِيعًا ۚ إِنَّهُ هُوَ الْغَفُورُ الرَّحِيمُ", "Katakanlah: \"Hai hamba-hamba-Ku yang malampaui batas terhadap diri mereka sendiri, janganlah kamu berputus asa dari rahmat Allah. Sesungguhnya Allah mengampuni dosa-dosa semuanya. Sesungguhnya Dialah Yang Maha Pengampun lagi Maha Penyayang.", "QS. Az-Zumar[39]: 53")
         )
-        binding.rvHafalan.setHasFixedSize(true)
-        binding.rvHafalan.layoutManager = LinearLayoutManager(requireActivity())
         hafalanAdapter = HafalanAdapter(listHafalan)
-        binding.rvHafalan.adapter = hafalanAdapter
-
+        binding.rvHafalan.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = hafalanAdapter
+        }
     }
 
 }

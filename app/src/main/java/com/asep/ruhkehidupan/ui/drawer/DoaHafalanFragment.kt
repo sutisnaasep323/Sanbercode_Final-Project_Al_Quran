@@ -9,8 +9,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.asep.ruhkehidupan.R
 import com.asep.ruhkehidupan.databinding.FragmentDoaHafalanBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
-
 
 class DoaHafalanFragment : Fragment() {
     private var _binding: FragmentDoaHafalanBinding? = null
@@ -27,11 +25,10 @@ class DoaHafalanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navView: BottomNavigationView = binding.navView
         val navHostFragment = childFragmentManager.findFragmentById(R.id.nav_host_fragment_doa_hafalan) as NavHostFragment
         var navController = navHostFragment.navController
 
-        navView.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
     }
 
     override fun onDestroyView() {

@@ -1,8 +1,14 @@
 package com.asep.ruhkehidupan.adapter
 
+import android.animation.LayoutTransition
+import android.os.Build
+import android.transition.AutoTransition
+import android.transition.TransitionManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.asep.ruhkehidupan.R
 import com.asep.ruhkehidupan.databinding.ItemDzikirBinding
@@ -11,28 +17,14 @@ import com.asep.ruhkehidupan.model.Dzikir
 class DzikirAdapter(private val listDzikir: MutableList<Dzikir>) :
     RecyclerView.Adapter<DzikirAdapter.DzikirViewHolder>() {
 
-    inner class DzikirViewHolder(val binding: ItemDzikirBinding) :
+    inner class DzikirViewHolder(private val binding: ItemDzikirBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun collapseExpandedView() {
-            binding.dalil.visibility = View.GONE
+        init {
+            setupListeners()
         }
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DzikirViewHolder {
-        val binding = ItemDzikirBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-        return DzikirViewHolder(binding)
-    }
-
-    override fun getItemCount(): Int = listDzikir.size
-
-    override fun onBindViewHolder(holder: DzikirViewHolder, position: Int) {
-        val dzikir = listDzikir[position]
-        with(holder.binding) {
+        fun bind(dzikir: Dzikir) = with(binding) {
             tvJudul.text = dzikir.judul
             tvNumber.text = dzikir.number
             tvDibaca.text = dzikir.dibaca
@@ -40,44 +32,46 @@ class DzikirAdapter(private val listDzikir: MutableList<Dzikir>) :
             tvIndo.text = dzikir.indonesia
             dalil.text = dzikir.dalil
 
-            val isExpandable: Boolean = dzikir.isExpandable
-            if (isExpandable) {
-                dalil.visibility = View.VISIBLE
-                view.visibility = View.VISIBLE
-                down.setImageResource(R.drawable.ic_arrow_up)
-            } else {
-                dalil.visibility = View.GONE
-                view.visibility = View.GONE
-                down.setImageResource(R.drawable.ic_arrow_down)
+            hiddenView.visibility = if (dzikir.isExpandable) View.VISIBLE else View.GONE
+        }
+
+        private fun setupListeners() {
+            binding.down.setOnClickListener {
+                collapseExpandedView()
             }
 
-            down.setOnClickListener {
-                isAnyItemExpanded(position)
-                dzikir.isExpandable = !dzikir.isExpandable
-                notifyItemChanged(position, 0)
+            binding.tvDalil.setOnClickListener {
+                collapseExpandedView()
             }
+        }
 
-            tvDalil.setOnClickListener {
-                isAnyItemExpanded(position)
-                dzikir.isExpandable = !dzikir.isExpandable
-                notifyItemChanged(position, 0)
-            }
+        private fun collapseExpandedView() {
+            val dzikir = listDzikir[adapterPosition]
+            dzikir.isExpandable = !dzikir.isExpandable
+            notifyItemChanged(adapterPosition,0)
+            val transition = AutoTransition()
+            TransitionManager.beginDelayedTransition(binding.cdDzikir, transition)
+            binding.hiddenView.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+            val visibility = binding.hiddenView.visibility
+            binding.down.setImageResource(getArrowDrawableResId(visibility))
+        }
+
+        private fun getArrowDrawableResId(visibility: Int): Int {
+            return if (visibility == View.VISIBLE) R.drawable.ic_arrow_up else R.drawable.ic_arrow_down
         }
     }
 
-    private fun isAnyItemExpanded(position: Int) {
-        val temp = listDzikir.indexOfFirst { it.isExpandable }
-        if (temp >= 0 && temp != position) {
-            listDzikir[temp].isExpandable = false
-            notifyItemChanged(temp, 0)
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DzikirViewHolder {
+        val binding = ItemDzikirBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DzikirViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DzikirViewHolder, position: Int, payloads: MutableList<Any>) {
-        if (payloads.isNotEmpty() && payloads[0] == 0) {
-            holder.collapseExpandedView()
-        } else {
-            super.onBindViewHolder(holder, position, payloads)
-        }
+    override fun getItemCount(): Int {
+        return listDzikir.size
     }
+
+    override fun onBindViewHolder(holder: DzikirViewHolder, position: Int) {
+        holder.bind(listDzikir[position])
+    }
+
 }

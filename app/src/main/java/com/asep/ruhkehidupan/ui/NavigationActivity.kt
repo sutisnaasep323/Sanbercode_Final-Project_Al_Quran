@@ -24,31 +24,23 @@ class NavigationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityNavigationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarNavigation.toolbar)
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_navigation)
 
-        // Menentukan fragment tujuan yang memiliki tampilan AppBar dan navigasi drawer
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_quran, R.id.nav_dzikir, R.id.nav_doa
             ), drawerLayout
         )
 
-        // Mengatur warna teks pada toolbar
         binding.appBarNavigation.toolbar.setTitleTextColor(ResourcesCompat.getColor(resources, R.color.text_primary, null))
-
-        // Menghubungkan ActionBar dengan NavController
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        // Menghubungkan NavigationView dengan NavController
-        navView.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -58,13 +50,13 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.action_settings -> {
                 val intent = Intent(this@NavigationActivity, SettingActivity::class.java)
                 startActivity(intent)
-                return true
+                true
             }
-            else -> return false
+            else -> false
         }
     }
 
